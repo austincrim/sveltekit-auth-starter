@@ -26,6 +26,6 @@
     {#if form?.message}
       <p class="mt-2 text-red-500">{form.message}</p>
     {/if}
-    <button class="mt-4" data-type="primary">Submit</button>
+    <button class="mt-4">Submit</button>
   </form>
 </div>

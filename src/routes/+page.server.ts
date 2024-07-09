@@ -1,6 +1,10 @@
 import { fail, redirect } from "@sveltejs/kit"
 import { auth } from "$lib/server/auth"
 
+export const load = ({ locals }) => {
+  if (!locals.user) redirect(302, "/login")
+}
+
 export const actions = {
   logout: async ({ locals, cookies }) => {
     if (!locals.session) {

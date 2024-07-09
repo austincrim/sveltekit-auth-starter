@@ -1,18 +1,13 @@
-import { redirect } from "@sveltejs/kit"
 import { auth } from "$lib/server/auth"
 
 export const PUBLIC_ROUTES = ["/login", "/register"]
 
 export async function handle({ event, resolve }) {
-  if (PUBLIC_ROUTES.includes(event.url.pathname)) {
-    return await resolve(event)
-  }
-
   const sessionId = event.cookies.get(auth.sessionCookieName)
   if (!sessionId) {
     event.locals.user = null
     event.locals.session = null
-    return redirect(302, "/login")
+    return resolve(event)
   }
 
   const { session, user } = await auth.validateSession(sessionId)

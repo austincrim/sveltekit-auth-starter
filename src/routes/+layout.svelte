@@ -1,11 +1,11 @@
 <script lang="ts">
   import "../app.css"
-  let { data } = $props()
+  let { data, children } = $props()
 </script>
 
 <nav class="flex items-center justify-between p-4 bg-gray-50 border-b">
-  <span class="font-semibold">Welcome</span>
-  <span class="flex gap-8">
+  <span class="font-semibold">Your next great idea</span>
+  <span class="flex gap-4">
     {#if data.email}
       <span>{data.email}</span>
       <form method="post" action="/?/logout">
@@ -15,4 +15,4 @@
   </span>
 </nav>
 
-<slot />
+{@render children()}

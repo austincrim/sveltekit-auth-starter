@@ -37,7 +37,12 @@ export const actions = {
       })
     }
     try {
-      let hash = hashSync(password)
+      let hash = hashSync(password, {
+        memoryCost: 19456,
+        timeCost: 2,
+        outputLen: 32,
+        parallelism: 1
+      })
       let [user] = await db
         .insert(users)
         .values({ email, password_hash: hash })

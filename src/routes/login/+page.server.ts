@@ -28,7 +28,15 @@ export const actions = {
         where: (users, { eq }) => eq(users.email, email)
       })
 
-      if (!existing || !verifySync(existing.password_hash, password))
+      if (
+        !existing ||
+        !verifySync(existing.password_hash, password, {
+          memoryCost: 19456,
+          timeCost: 2,
+          outputLen: 32,
+          parallelism: 1
+        })
+      )
         return fail(400, { message: "email or password incorrect" })
 
       const session = await auth.createSession(existing.id, {})

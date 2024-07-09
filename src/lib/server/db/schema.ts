@@ -18,6 +18,7 @@ export const users = sqliteTable("users", {
 })
 
 export const sessions = sqliteTable("sessions", {
+  // lucia requires id to be a string
   id: text("id").primaryKey(),
   expiresAt: integer("expires_at").notNull(),
   userId: integer("user_id")
